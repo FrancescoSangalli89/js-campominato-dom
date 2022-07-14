@@ -20,11 +20,13 @@ let usedNumber = [];
 
 let randomBomb;
 
-let score = document.getElementById('score');
-
-let lost = false;
-
 function startGame() {
+
+    let lost = false;
+
+    let score = document.getElementById('score');
+
+    score.innerHTML = '';
 
     let difficulty = document.getElementById('difficulty').value;
 
@@ -46,9 +48,6 @@ function startGame() {
             randomBomb = getUniqueBombCell(usedNumber, 1, maxCell);
         
             usedNumber.push(randomBomb);
-
-            console.log(usedNumber[bomb]);
-            console.log(typeof usedNumber[bomb]);
 
         }
 
@@ -81,9 +80,6 @@ function startGame() {
     
             currentElement.addEventListener('click',
                 function () {
-                    
-
-                    
 
                     if (lost == false) {
 
@@ -99,6 +95,15 @@ function startGame() {
                         } else {
                             score.innerHTML = `Il tuo punteggio è: ${selected}`;
                         }
+
+                        if (selected == (maxCell - 16)) {
+                            console.log(selected);
+                            console.log(maxCell);
+                            score.innerHTML = `YOU WIN!!!`;
+                            lost = true;
+                        }
+
+                        
                     } 
                     
                 }
