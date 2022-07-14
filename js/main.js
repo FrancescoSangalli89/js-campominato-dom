@@ -16,6 +16,10 @@ const playBtn = document.getElementById('btn');
 
 playBtn.addEventListener('click', startGame);
 
+const usedNumber = [];
+
+let randomBomb;
+
 function startGame() {
 
     let difficulty = document.getElementById('difficulty').value;
@@ -44,11 +48,15 @@ function startGame() {
 
         for (let i = 1; i <= maxCell; i++) {
 
+            randomBomb = getUniqueBombCell(usedNumber, 1, maxCell);
+
+            usedNumber.push(randomBomb);
+            console.log(usedNumber);
             let currentElement = getSquare(i, cellRow);
     
             currentElement.addEventListener('click',
                 function () {
-                    this.classList.toggle('clicked');
+                    this.classList.add('clicked');
                     console.log(i);
                 }
             )
@@ -68,6 +76,32 @@ function startGame() {
 
         return currentElement;
 
+    }
+
+}
+
+for (let bomb = 0; bomb < 16; bomb++) {
+    
+    function getRandomBomb(min, max) {
+        return Math.floor(Math.random() * ( max - min + 1)) + min;
+    }
+    
+    function getUniqueBombCell(usedNumber, min, max) {
+    
+        let validNumber = false;
+    
+        let createdRandomNumber;
+    
+        while( validNumber == false ) {
+            createdRandomNumber = getRandomBomb( min, max);
+    
+            if (usedNumber.includes(createdRandomNumber) == false) {
+                validNumber = true;
+            }
+        }
+
+        return createdRandomNumber;
+    
     }
 
 }

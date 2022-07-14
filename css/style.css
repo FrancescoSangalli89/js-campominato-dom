@@ -74,8 +74,12 @@ html {
     cursor: pointer;
 }
 
-.clicked {
+.clicked.ok {
     background-color: lightblue;
+}
+
+.clicked.bomb {
+    background-color: red;
 }
 
 #site-footer{
