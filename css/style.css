@@ -47,6 +47,10 @@ html {
     border: 1px solid #000;
 }
 
+#btn:hover {
+    cursor: pointer;
+}
+
 .container {
     background-color: #7FFFD4;
     height: calc(100vh - 130px);

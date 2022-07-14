@@ -16,9 +16,13 @@ const playBtn = document.getElementById('btn');
 
 playBtn.addEventListener('click', startGame);
 
-const usedNumber = [];
+let usedNumber = [];
 
 let randomBomb;
+
+let score = document.getElementById('score');
+
+let lost = false;
 
 function startGame() {
 
@@ -36,6 +40,29 @@ function startGame() {
         maxCell = 49;
     }
 
+    if (usedNumber < 16) {
+
+        for (let bomb = 0; bomb < 16; bomb++) {
+            randomBomb = getUniqueBombCell(usedNumber, 1, maxCell);
+        
+            usedNumber.push(randomBomb);
+
+            console.log(usedNumber[bomb]);
+            console.log(typeof usedNumber[bomb]);
+
+        }
+
+    } else {
+
+        usedNumber = [];
+        for (let bomb = 0; bomb < 16; bomb++) {
+            randomBomb = getUniqueBombCell(usedNumber, 1, maxCell);
+        
+            usedNumber.push(randomBomb);
+        }
+
+    }
+
     cellRow = Math.sqrt(maxCell);
 
     playground();
@@ -46,18 +73,34 @@ function startGame() {
 
         gridDom.innerHTML = '';
 
+        let selected = 0;
+
         for (let i = 1; i <= maxCell; i++) {
 
-            randomBomb = getUniqueBombCell(usedNumber, 1, maxCell);
-
-            usedNumber.push(randomBomb);
-            console.log(usedNumber);
-            let currentElement = getSquare(i, cellRow);
+            let currentElement = getSquare(i, cellRow, usedNumber);
     
             currentElement.addEventListener('click',
                 function () {
-                    this.classList.add('clicked');
-                    console.log(i);
+                    
+
+                    
+
+                    if (lost == false) {
+
+                        if (!this.classList.contains('clicked') && !this.classList.contains('bomb')) {
+                            selected ++;
+                        }
+    
+                        this.classList.add('clicked');
+
+                        if (this.classList.contains('bomb')) {
+                            lost = true;
+                            score.innerHTML = `Hai perso! Il tuo punteggio è: ${selected}`;
+                        } else {
+                            score.innerHTML = `Il tuo punteggio è: ${selected}`;
+                        }
+                    } 
+                    
                 }
             )
     
@@ -66,22 +109,6 @@ function startGame() {
         }
     }
 
-    function getSquare(number, cellRow) {
-
-        const currentElement = document.createElement('div');
-        currentElement.style.height = `calc(100% / ${cellRow})`;
-        currentElement.style.width = `calc(100% / ${cellRow})`;
-        currentElement.append(number);
-        currentElement.classList.add('square');
-
-        return currentElement;
-
-    }
-
-}
-
-for (let bomb = 0; bomb < 16; bomb++) {
-    
     function getRandomBomb(min, max) {
         return Math.floor(Math.random() * ( max - min + 1)) + min;
     }
@@ -102,6 +129,30 @@ for (let bomb = 0; bomb < 16; bomb++) {
 
         return createdRandomNumber;
     
+    }
+
+    function getSquare(number, cellRow, array) {
+        
+        const currentElement = document.createElement('div');
+        currentElement.style.height = `calc(100% / ${cellRow})`;
+        currentElement.style.width = `calc(100% / ${cellRow})`;
+        currentElement.append(number);
+        currentElement.classList.add('square');
+        currentElement.classList.add('ok');
+
+        for (let x = 0; x < array.length; x++) {
+
+            if (number == array[x]) {
+                currentElement.classList.add('bomb');
+                currentElement.classList.remove('ok');
+
+            }
+            
+        }
+        
+
+        return currentElement;
+
     }
 
 }
