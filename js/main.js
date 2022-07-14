@@ -22,7 +22,7 @@ let randomBomb;
 
 function startGame() {
 
-    let lost = false;
+    let winLost = false;
 
     let score = document.getElementById('score');
 
@@ -81,7 +81,7 @@ function startGame() {
             currentElement.addEventListener('click',
                 function () {
 
-                    if (lost == false) {
+                    if (winLost == false) {
 
                         if (!this.classList.contains('clicked') && !this.classList.contains('bomb')) {
                             selected ++;
@@ -90,7 +90,7 @@ function startGame() {
                         this.classList.add('clicked');
 
                         if (this.classList.contains('bomb')) {
-                            lost = true;
+                            winLost = true;
                             score.innerHTML = `Hai perso! Il tuo punteggio è: ${selected}`;
                         } else {
                             score.innerHTML = `Il tuo punteggio è: ${selected}`;
@@ -100,9 +100,8 @@ function startGame() {
                             console.log(selected);
                             console.log(maxCell);
                             score.innerHTML = `YOU WIN!!!`;
-                            lost = true;
+                            winLost = true;
                         }
-
                         
                     } 
                     
