@@ -1,0 +1,84 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+#site-header {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lx-header {
+    max-width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.lx-header img {
+    height: 100%;
+}
+
+.rx-header {
+    padding: 0 20px;
+    display: flex;
+}
+
+#difficolta {
+    background-color: #E9E9ED;
+    border-radius: 5px;
+}
+
+#btn {
+    display: inline-block;
+    text-align: center;
+    padding: 0 30px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+.container {
+    background-color: #7FFFD4;
+    height: calc(100vh - 130px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#containerGrid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 400px;
+}
+
+.square {
+    border: solid 1px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.square:hover {
+    cursor: pointer;
+}
+
+.clicked {
+    background-color: lightblue;
+}
+
+#site-footer{
+    height: 50px;
+}
+
